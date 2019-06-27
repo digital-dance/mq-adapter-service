@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: kafka-producer-restful
+
+logging:
+  file: ./logs/BootApp.log
+  level:
+    com.dragon.study.spring.boot: DEBUG
