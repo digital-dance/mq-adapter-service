@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: zuul-gateway
+server:
+  port: 8670
+ribbon:
+  eureka:
+    enabled: false
+zuul:
+  routes:
+    books:
+      url: http://localhost:8090
+logging:
+  file: ./logs/BootZuulApp.log
+  level:
+    org.xinyu.com.mq.boot.rest: DEBUG

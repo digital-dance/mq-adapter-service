@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: config-server
+  namespace: docker-pv
+spec:
+  replicas: 2
+  template:
+    metadata:
+      namespace: docker-pv
+      labels:
+        run: config-server
+    spec:
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim1
+      imagePullSecrets:
+          - name: digital.dance.com
+      containers:
+        - name: config-server
+          image: www.digital.dance.com:5001/repository/digital.dance.docker/config-server:v1
+          ports:
+            - name: http
+              containerPort: 8762
+#              hostIP: 0.0.0.0
+#              hostPort: 8761
+#              protocol: TCP
+#            - name: https
+#              containerPort: 443
+#              hostIP: 0.0.0.0
+#              hostPort: 443
+#              protocol: TCP
+          volumeMounts:
+            - mountPath: "/app"
+              name: task-pv-storage
+#    externalIPs:
+#      - 192.168.99.102
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-server
+  namespace: docker-pv
+  labels:
+    run: config-server
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8762
+      targetPort: 8762
+      nodePort: 38762
+#    - name: https
+#      port: 443
+#      targetPort: 443
+#      nodePort: 30063
+  selector:
+    run: config-server
