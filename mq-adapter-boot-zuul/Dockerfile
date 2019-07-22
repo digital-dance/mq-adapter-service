@@ -15,7 +15,7 @@ RUN echo ${BUILD_WORKDIR}
 WORKDIR ${BUILD_WORKDIR}
 ADD ${JAR_FILE} /jar/mq-adapter-boot-zuul.jar
 
-COPY ${SH_FILE} /jar/eureka-start.sh
+COPY ${SH_FILE} /jar/mq-adapter-boot-zuul-start.sh
 
 EXPOSE ${SERVER_PORT}
 
