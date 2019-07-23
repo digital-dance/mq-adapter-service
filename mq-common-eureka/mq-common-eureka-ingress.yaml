@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mq-common-eureka-ingress
+  namespace: docker-pv
+  annotations:
+    kubernets.io/ingress.class: "nginx"
+
+#    ingress.kubernetes.io/ssl-passthrough: "true"
+#    ingress.kubernetes.io/ssl-redirect: "True"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      proxy_set_header Host $host:$server_port;
+      proxy_set_header Authorization $http_authorization;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Cookie $http_cookie;
+      client_header_buffer_size 2046k;
+spec:
+#  tls:
+#    - hosts:
+#      - mq.eureka.ingress
+#      secretName: dashboard.ingress-certs
+  rules:
+    - host: eureka.mq.ingress
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mq-common-eureka
+              servicePort: 8761
+    # - host: www.nginx.ingress
+    #   http:
+    #     paths:
+    #       - path: /
+    #         backend:
+    #           serviceName: my-nginx
+    #           servicePort: 80
+    # - host: www.dashboard.ingress
+    #   https:
+    #     paths:
+    #       - path: /
+    #         backend:
+    #           serviceName: kubernetes-dashboard
+    #           servicePort: 443
