@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: mq-common-eureka-ingress
+  name: www-mq-ingress
   namespace: docker-pv
   annotations:
     kubernets.io/ingress.class: "nginx"
@@ -18,8 +18,8 @@ metadata:
 spec:
 #  tls:
 #    - hosts:
-#      - mq.eureka.ingress
-#      secretName: dashboard.ingress-certs
+#      - www.mq.ingress
+#      secretName: www-mq-ingress-certs
   rules:
     - host: www.mq.ingress
       http:
