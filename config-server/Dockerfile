@@ -1,4 +1,5 @@
-FROM java:8
+#FROM java:8
+FROM www.digital.dance.com:5001/repository/digital.dance.docker/alpine-oraclejdk8:8
 #VOLUME /app
 RUN mkdir -p /jar
 

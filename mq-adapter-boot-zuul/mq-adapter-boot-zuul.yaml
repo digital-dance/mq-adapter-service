@@ -4,7 +4,7 @@ metadata:
   name: mq-adapter-boot-zuul
   namespace: docker-pv
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       namespace: docker-pv
@@ -50,7 +50,7 @@ spec:
     - name: http
       port: 8670
       targetPort: 8670
-      nodePort: 38670
+      nodePort: 31670
 #    - name: https
 #      port: 443
 #      targetPort: 443
