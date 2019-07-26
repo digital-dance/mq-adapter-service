@@ -6,8 +6,8 @@ metadata:
   annotations:
     kubernets.io/ingress.class: "nginx"
 
-#    ingress.kubernetes.io/ssl-passthrough: "true"
-#    ingress.kubernetes.io/ssl-redirect: "True"
+    ingress.kubernetes.io/ssl-passthrough: "true"
+    ingress.kubernetes.io/ssl-redirect: "True"
     nginx.ingress.kubernetes.io/server-snippet: |
       proxy_set_header Host $host:$server_port;
       proxy_set_header Authorization $http_authorization;
@@ -16,10 +16,10 @@ metadata:
       proxy_set_header Cookie $http_cookie;
       client_header_buffer_size 2046k;
 spec:
-#  tls:
-#    - hosts:
-#      - www.mq.ingress
-#      secretName: www-mq-ingress-certs
+  tls:
+    - hosts:
+      - www.mq.ingress
+      secretName: www-mq-ingress-certs
   rules:
     - host: www.mq.ingress
       http:
