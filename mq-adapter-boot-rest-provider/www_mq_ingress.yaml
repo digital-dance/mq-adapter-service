@@ -19,7 +19,7 @@ spec:
 #  tls:
 #    - hosts:
 #      - www.mq.ingress
-#      secretName: www-mq-ingress-certs
+#      secretName: mq-ingress-certs
   rules:
     - host: www.mq.ingress
       http:

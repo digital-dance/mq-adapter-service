@@ -16,7 +16,7 @@ spec:
           persistentVolumeClaim:
             claimName: task-pv-claim1
       imagePullSecrets:
-          - name: digital.dance.com
+          - name: digital-dance-com
       containers:
         - name: mq-adapter-boot-rest-provider
           image: www.digital.dance.com:5001/repository/digital.dance.docker/mq-adapter-boot-rest-provider:v1

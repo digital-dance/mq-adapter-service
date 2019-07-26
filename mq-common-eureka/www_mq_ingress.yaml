@@ -6,8 +6,8 @@ metadata:
   annotations:
     kubernets.io/ingress.class: "nginx"
 
-    ingress.kubernetes.io/ssl-passthrough: "true"
-    ingress.kubernetes.io/ssl-redirect: "True"
+#    ingress.kubernetes.io/ssl-passthrough: "true"
+#    ingress.kubernetes.io/ssl-redirect: "True"
     nginx.ingress.kubernetes.io/server-snippet: |
       proxy_set_header Host $host:$server_port;
       proxy_set_header Authorization $http_authorization;
@@ -19,12 +19,12 @@ spec:
   tls:
     - hosts:
       - www.mq.ingress
-      secretName: www-mq-ingress-certs
+      secretName: mq-ingress-certs
   rules:
     - host: www.mq.ingress
       http:
         paths:
-          - path: /eureka
+          - path: /
             backend:
               serviceName: mq-common-eureka
               servicePort: 8761

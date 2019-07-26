@@ -61,7 +61,7 @@ spec:
           persistentVolumeClaim:
             claimName: task-pv-claim1
       imagePullSecrets:
-          - name: digital.dance.com
+          - name: digital-dance-com
       containers:
         - name: mq-common-eureka
           image: www.digital.dance.com:5001/repository/digital.dance.docker/mq-common-eureka:v1

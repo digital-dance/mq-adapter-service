@@ -44,7 +44,7 @@ spec:
               serviceName: mq-adapter-boot-rest
               servicePort: 1111
 
-          - path: /
+          - path: /config
             backend:
               serviceName: config-server
               servicePort: 8762
