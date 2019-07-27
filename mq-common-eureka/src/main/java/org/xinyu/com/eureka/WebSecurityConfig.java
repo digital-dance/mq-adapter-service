@@ -54,7 +54,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http
+            .formLogin().loginProcessingUrl("/eureka-server/loginForm").loginPage("/eureka-server/login")
+            .and()
+            .authorizeRequests()
+            .antMatchers("/eureka-server/loginForm").permitAll()
+            .antMatchers("/eureka-server/login").permitAll()
+            .and().csrf().disable();
         super.configure(http);
     }
 
