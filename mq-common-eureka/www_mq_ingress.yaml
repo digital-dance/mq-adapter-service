@@ -24,7 +24,7 @@ spec:
     - host: www.mq.ingress
       http:
         paths:
-          - path: /eureka
+          - path: /eureka-server
             backend:
               serviceName: mq-common-eureka
               servicePort: 8761
