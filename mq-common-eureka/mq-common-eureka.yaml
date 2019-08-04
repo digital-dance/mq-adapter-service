@@ -36,7 +36,7 @@
 #    - name: http
 #      port: 8761
 #      targetPort: 8761
-##      nodePort: 31761
+###      nodePort: 31761
 #  externalIPs:
 #    - 192.168.99.102
 #  selector:
