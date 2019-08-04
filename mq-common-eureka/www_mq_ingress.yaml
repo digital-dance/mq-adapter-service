@@ -16,14 +16,20 @@ metadata:
       proxy_set_header Cookie $http_cookie;
       client_header_buffer_size 2046k;
 spec:
-  tls:
-    - hosts:
-      - www.mq.ingress
-      secretName: mq-ingress-certs
+#  tls:
+#    - hosts:
+#      - www.mq.ingress
+#      secretName: mq-ingress-certs
   rules:
     - host: www.mq.ingress
       http:
         paths:
+
+          - path: /eureka
+            backend:
+              serviceName: mq-common-eureka
+              servicePort: 8761
+
           - path: /eureka-server
             backend:
               serviceName: mq-common-eureka
