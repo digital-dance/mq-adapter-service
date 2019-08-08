@@ -76,8 +76,16 @@ public class BootRestfulApp {
 //        return producerHandler;
 //    }
     @Bean
-    public Runnable createRunnable() {
+    public Runnable runnable() {
+//        Runnable runnable = new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                System.out.println("spring boot is running");
+//            }
+//        };
         return () -> System.out.println("spring boot is running");
+//        return runnable;
     }
 
     public static void main( String[] args )
