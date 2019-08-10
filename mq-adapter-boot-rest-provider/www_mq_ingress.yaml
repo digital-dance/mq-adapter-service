@@ -35,7 +35,7 @@ spec:
               serviceName: mq-common-eureka
               servicePort: 8761
 
-#          - path: /zuul
+##          - path: /zuul
 #            backend:
 #              serviceName: mq-adapter-boot-zuul
 #              servicePort: 8670
