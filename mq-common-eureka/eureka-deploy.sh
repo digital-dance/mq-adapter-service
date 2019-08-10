@@ -1,4 +1,5 @@
 #!/bin/bash
+kubectl apply -f docker-pv-namespace.yaml
 
 kubectl apply -f persistent-volume.yaml
 
