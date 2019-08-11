@@ -10,4 +10,4 @@ kubectl apply -f repository-secret.yaml
 
 kubectl apply -f mq-adapter-boot-zuul.yaml
 
-kubectl apply -f www_mq_ingress.yaml
+#kubectl apply -f www_mq_ingress.yaml
