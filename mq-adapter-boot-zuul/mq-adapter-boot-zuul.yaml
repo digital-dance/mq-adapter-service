@@ -20,6 +20,7 @@ spec:
       containers:
         - name: mq-adapter-boot-zuul
           image: www.digital.dance.com:5001/repository/digital.dance.docker/mq-adapter-boot-zuul:v1
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8670
