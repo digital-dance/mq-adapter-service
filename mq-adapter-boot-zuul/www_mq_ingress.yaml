@@ -21,35 +21,35 @@ spec:
 #      - www.mq.ingress
 #      secretName: mq-ingress-certs
   rules:
-    - host: www.mq.ingress.zuul
+    - host: www.mq.ingress
       http:
         paths:
 
-#          - path: /eureka
-#            backend:
-#              serviceName: mq-common-eureka
-#              servicePort: 8761
-#
-#          - path: /eureka-server
-#            backend:
-#              serviceName: mq-common-eureka
-#              servicePort: 8761
+          - path: /eureka
+            backend:
+              serviceName: mq-common-eureka
+              servicePort: 8761
 
-          - path: /
+          - path: /eureka-server
+            backend:
+              serviceName: mq-common-eureka
+              servicePort: 8761
+
+          - path: /api
             backend:
               serviceName: mq-adapter-boot-zuul
               servicePort: 8670
 
-#          - path: /provider
-#            backend:
-#              serviceName: mq-adapter-boot-rest-provider
-#              servicePort: 2222
-#
-#          - path: /rest
+          - path: /kafka
+            backend:
+              serviceName: mq-adapter-boot-rest-provider
+              servicePort: 2222
+
+#          - path: /api
 #            backend:
 #              serviceName: mq-adapter-boot-rest
 #              servicePort: 1111
-#
+
 #          - path: /config
 #            backend:
 #              serviceName: config-server
