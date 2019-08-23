@@ -40,6 +40,11 @@ spec:
               serviceName: mq-adapter-boot-zuul
               servicePort: 8670
 
+          - path: /api
+            backend:
+              serviceName: mq-adapter-boot-zuul-1
+              servicePort: 8670
+
           - path: /kafka
             backend:
               serviceName: mq-adapter-boot-rest-provider
