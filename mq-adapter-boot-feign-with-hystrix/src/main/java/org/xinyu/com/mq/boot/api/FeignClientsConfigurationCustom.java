@@ -1,6 +1,7 @@
 package org.xinyu.com.mq.boot.api;
 
 //import feign.RequestInterceptor;
+import feign.Contract;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,5 +112,11 @@ public class FeignClientsConfigurationCustom implements RequestInterceptor {
     @Bean
     public FeignHystrixConcurrencyStrategy feignHystrixConcurrencyStrategy() {
         return new FeignHystrixConcurrencyStrategy();
+    }
+
+    @Bean
+    public Contract feignContract() {
+        //使用feign自带契约
+        return new feign.Contract.Default();
     }
 }

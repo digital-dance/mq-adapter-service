@@ -2,12 +2,15 @@ package org.xinyu.com.mq.boot.api;
 
 import com.digital.dance.framework.infrastructure.commons.ResponseVo;
 
+import feign.RequestLine;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import org.xinyu.com.mq.boot.api.hystrix.KafkaProducerFallbackFactory;
+
+import java.net.URI;
 
 
 //@FeignClient(name = "kafka-producer-rest", fallback = KafkaProducerHystrix.class)
@@ -27,5 +30,10 @@ public interface KafkaProducer {
     @RequestMapping("/producer/json")
     @ResponseBody
     public ResponseVo sendJsonMsg( @RequestParam("pJsonMsg") String pJsonMsg)//@RequestParam("pJsonMsg")
+            throws Exception;
+
+    @RequestLine("GET /producer/json")
+    @ResponseBody
+    public ResponseVo sendJsonMsg(URI uri, @RequestParam("pJsonMsg") String pJsonMsg)//@RequestParam("pJsonMsg")
             throws Exception;
 }
