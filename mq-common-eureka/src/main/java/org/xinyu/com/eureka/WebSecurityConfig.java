@@ -1,4 +1,5 @@
 package org.xinyu.com.eureka;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -51,6 +52,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private String zuul_password;
     @Value("${users.zuul.roles}")
     private String [] zuul_roles;
+
+    @Value("${spring.redis.port}")
+    private String redisPort;
+
+    @Autowired
+    private LoginController loginController;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
