@@ -1,5 +1,8 @@
 package org.xinyu.com.eureka;
 
+import com.digital.dance.framework.infrastructure.commons.AppPropsConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.FileSystemResourceLoader;
@@ -18,22 +21,29 @@ import java.util.List;
 
 @Configuration
 public class SystemPropertySourceFactory implements PropertySourceFactory {
-
+//    @Value("${spring.profiles.active}")
+//    private String envName;
+//    @Autowired
+//    private SpringContextUtil springContextUtil;
     @Override
     public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) throws IOException {
-        FileSystemResourceLoader resourceLoader = new FileSystemResourceLoader();
+//        FileSystemResourceLoader resourceLoader = new FileSystemResourceLoader();
+        String activeEnv = SpringContextUtil.getActiveProfile();
         //spring.profiles.active = dev,test
         //取得当前活动的环境名称（因为直接获取spring.profiles.active 失败，所以才把环境名称拼在文件名后面来拿）
         //其实感觉应该有可以直接取的方法比如从环境里取
         String[] fileproperty = encodedResource.getResource().getFilename().split("\\.");
         String suffix = fileproperty[1];
-        String[] fileNameParts = fileproperty[0].split("-");
-        String fileName = fileNameParts[0];
-        String[] actives = fileNameParts[1].split(",");
-        //如果只有一个，就直接返回
-        if (actives.length <= 1) {
-            return (fileName != null ? new ResourcePropertySource(fileName, encodedResource) : new ResourcePropertySource(encodedResource));
-        }
+//        String[] fileNameParts = fileproperty[0].split("-");
+//        String fileName = fileNameParts[0];
+//        String[] actives = fileNameParts[1].split(",");
+        String fileName = fileproperty[0];
+
+        String[] actives = activeEnv.split(",");
+//        //如果只有一个，就直接返回
+//        if (actives.length <= 1) {
+//            return (fileName != null ? new ResourcePropertySource(fileName, encodedResource) : new ResourcePropertySource(encodedResource));
+//        }
         //如果是多个
         List<InputStream> inputStreamList = new ArrayList<>();
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 //        , factory = SystemPropertySourceFactory.class
 //        , ignoreResourceNotFound=true, encoding="UTF-8")
 @PropertySource(name="systemConfig"
-        , value = {"classpath:/systemConfig-dev,test.properties","classpath:/jdbc-dev,test.properties"}
+        , value = {"classpath:/systemConfig.properties","classpath:/jdbc.properties","classpath:/redis.properties"}
         , factory = SystemPropertySourceFactory.class
         , ignoreResourceNotFound=true, encoding="UTF-8")
 public class SystemProperties {
