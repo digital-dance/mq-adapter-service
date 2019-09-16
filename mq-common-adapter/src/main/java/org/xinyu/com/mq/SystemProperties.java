@@ -1,4 +1,4 @@
-package org.xinyu.com.eureka;
+package org.xinyu.com.mq;
 
 
 import org.springframework.context.annotation.PropertySource;

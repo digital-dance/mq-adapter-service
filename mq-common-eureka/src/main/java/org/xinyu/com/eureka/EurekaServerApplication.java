@@ -21,6 +21,7 @@ public class EurekaServerApplication {
 
     public static void main(String[] args) {
 //        SpringApplication.run(EurekaServerApplication.class, args);
+        org.xinyu.com.mq.SpringContextUtil.setApplicationClass( EurekaServerApplication.class );
         new SpringApplicationBuilder(EurekaServerApplication.class).web(WebApplicationType.SERVLET).run(args);
 //    String redisPorts = redisPort;
     }

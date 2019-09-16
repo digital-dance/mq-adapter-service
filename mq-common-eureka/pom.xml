@@ -204,6 +204,12 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+		<dependency>
+		<groupId>mq.common.adapter</groupId>
+		<artifactId>mq-common-adapter</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
