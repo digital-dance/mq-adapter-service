@@ -1,6 +1,7 @@
 package org.xinyu.com.eureka;
 
 import com.digital.dance.framework.infrastructure.commons.AppPropsConfig;
+import com.digital.dance.framework.infrastructure.commons.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,8 @@ import java.util.List;
 
 @Configuration
 public class SystemPropertySourceFactory implements PropertySourceFactory {
+
+    private Log log = new Log( SystemPropertySourceFactory.class );
 //    @Value("${spring.profiles.active}")
 //    private String envName;
 //    @Autowired
@@ -49,22 +52,30 @@ public class SystemPropertySourceFactory implements PropertySourceFactory {
 
         //遍历后把所有环境的url全部抓取到list中
         Arrays.stream(actives).forEach(active -> {
-            InputStream in = this.getClass().getResourceAsStream("/" + fileName.concat("-" + active).concat(".").concat(suffix));
+            String resourceName = fileName.concat("-" + active).concat(".").concat(suffix);
+            InputStream in = SpringContextUtil.getApplicationClass().getResourceAsStream( "/" + resourceName );
             if (in != null) {
                 inputStreamList.add(in);
+                log.info("SpringContextUtil.getApplicationClass().getResourceAsStream" );
+            } else {
+                in = SpringContextUtil.getApplicationClass().getClassLoader().getResourceAsStream( resourceName );
+                if (in != null) {
+                    inputStreamList.add(in);
+                    log.info("SpringContextUtil.getApplicationClass().getClassLoader().getResourceAsStream" );
+                }
             }
         });
 
         if (inputStreamList != null && inputStreamList.size() > 0) {
 
             //串行流，将多个文件流合并车一个流
-            SequenceInputStream inputStream = new SequenceInputStream(Collections.enumeration(inputStreamList));
+            SequenceInputStream inputStream = new SequenceInputStream( Collections.enumeration( inputStreamList ) );
             //转成resource
-            InputStreamResource resource = new InputStreamResource(inputStream);
+            InputStreamResource resource = new InputStreamResource( inputStream );
 
-            return (fileName != null ? new ResourcePropertySource(fileName, new EncodedResource(resource)) : new ResourcePropertySource(new EncodedResource(resource)));
+            return (fileName != null ? new ResourcePropertySource( fileName, new EncodedResource( resource ) ) : new ResourcePropertySource(new EncodedResource( resource ) ) );
         } else {
-            return (fileName != null ? new ResourcePropertySource(fileName, encodedResource) : new ResourcePropertySource(encodedResource));
+            return (fileName != null ? new ResourcePropertySource( fileName, encodedResource ) : new ResourcePropertySource( encodedResource ) );
         }
     }
 }

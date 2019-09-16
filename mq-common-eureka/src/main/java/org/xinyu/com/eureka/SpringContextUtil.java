@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.Locale;
 
 @Configuration
@@ -15,6 +16,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
     private static ApplicationContext context = null;
     private static String activeProfile;
+    private static Class applicationClass;
 
     /* (non Javadoc)
      * @Title: setApplicationContext
@@ -43,12 +45,23 @@ public class SpringContextUtil implements ApplicationContextAware {
     }
 
     /// 获取当前环境
-    public static String getActiveProfile() {
+    public static String getActiveProfile() throws IOException {
 //        return context.getEnvironment().getActiveProfiles()[0];
+        if(SpringContextUtil.applicationClass == null){
+            throw new IOException( "SpringContextUtil.applicationClass is need to set in main by SpringContextUtil.setApplicationClass");
+        }
         if( activeProfile == null ) {
-            activeProfile = AppPropsConfig.getStrProperties("application.properties", EurekaServerApplication.class)
+            activeProfile = AppPropsConfig.getStrProperties("application.properties", SpringContextUtil.applicationClass)
                     .get("spring.profiles.active");
         }
         return activeProfile;
+    }
+
+    public static void setApplicationClass(Class pApplicationClass){
+        SpringContextUtil.applicationClass = pApplicationClass;
+    }
+
+    public static Class getApplicationClass(){
+        return SpringContextUtil.applicationClass;
     }
 }
