@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Bean;
 @EnableEurekaServer // 声明这是一个Eureka Server
 @SpringBootApplication
 public class EurekaServerApplication {
-    @Bean
-    public LoginController loginController(){
-        LoginController loginController = new LoginController();
-        return loginController;
-    }
+//    @Bean
+//    public LoginController loginController(){
+//        LoginController loginController = new LoginController();
+//        return loginController;
+//    }
 
     public static void main(String[] args) {
 //        SpringApplication.run(EurekaServerApplication.class, args);

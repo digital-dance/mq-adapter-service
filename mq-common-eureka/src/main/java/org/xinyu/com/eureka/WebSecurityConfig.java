@@ -53,11 +53,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${users.zuul.roles}")
     private String [] zuul_roles;
 
-    @Value("${spring.redis.port}")
-    private String redisPort;
-
-    @Autowired
-    private LoginController loginController;
+//    @Value("${spring.redis.port}")
+//    private String redisPort;
+//
+//    @Autowired
+//    private LoginController loginController;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
