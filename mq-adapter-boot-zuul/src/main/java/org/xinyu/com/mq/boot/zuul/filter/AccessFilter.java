@@ -1,5 +1,6 @@
 package org.xinyu.com.mq.boot.zuul.filter;
 
+import com.digital.dance.client.core.shiro.cache.VCache;
 import com.digital.dance.client.core.shiro.filter.PermissionHelper;
 import com.digital.dance.framework.infrastructure.commons.AppPropsConfig;
 import com.netflix.zuul.ZuulFilter;
@@ -82,6 +83,9 @@ public class AccessFilter extends ZuulFilter {
         Map map = AppPropsConfig.getProperties("classpath:system.properties", AccessFilter.class);
         log.info(map);
         getPermissionHelper().init(map);
+        VCache.set("zuul-redis-key", "getPermissionHelper().init(map)");
+        String cache_test = VCache.get("zuul-redis-key", String.class);
+        log.info(cache_test);
         ctx.setSendZuulResponse(true);// 对该请求进行路由
         ctx.setResponseStatusCode(200); // 返回200正确响应
         //return ctx;
