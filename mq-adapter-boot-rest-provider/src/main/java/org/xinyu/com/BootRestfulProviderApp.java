@@ -99,6 +99,7 @@ public class BootRestfulProviderApp {
     {
         System.out.println( "BootRestfulProviderApp is starting!" );
         //SpringApplication.run(BootApp.class, args);
+        org.xinyu.com.mq.SpringContextUtil.setApplicationClass( BootRestfulProviderApp.class );
         ConfigurableApplicationContext context  = new SpringApplicationBuilder(BootRestfulProviderApp.class).web(WebApplicationType.SERVLET).run(args);
 //        ConfigurableApplicationContext context = SpringApplication.run(BootApp.class, args);
         //context.getBean(Runnable.class).run();
