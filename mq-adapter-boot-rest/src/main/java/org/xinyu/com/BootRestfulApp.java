@@ -27,7 +27,7 @@ import java.util.Map;
 @EnableDiscoveryClient
 //@SpringBootConfiguration
 @SpringBootApplication
-@ImportResource( {"classpath*:/ioc_conf/com-mq-boot-context.xml"} )
+//@ImportResource( {"classpath*:/ioc_conf/com-mq-boot-context.xml"} )
 @EnableRedisHttpSession(redisFlushMode = RedisFlushMode.IMMEDIATE)//增加redissession缓存支持
 //@SpringCloudApplication
 @RefreshScope
@@ -91,6 +91,7 @@ public class BootRestfulApp {
     public static void main( String[] args )
     {
         System.out.println( "BootRestfulApp is starting!" );
+        org.xinyu.com.mq.SpringContextUtil.setApplicationClass( BootRestfulApp.class );
         //SpringApplication.run(BootRestfulApp.class, args);
 //        ConfigurableApplicationContext context = SpringApplication.run(BootRestfulApp.class, args);
         ConfigurableApplicationContext context  = new SpringApplicationBuilder(BootRestfulApp.class).web(WebApplicationType.SERVLET).run(args);

@@ -24,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 public class KafkaProducerController {
 
     protected static final Log LOG = new Log(KafkaProducerController.class);
-    @Autowired
-    private ProducerHandler producerHandler;
+//    @Autowired
+//    private ProducerHandler producerHandler;
 
     @RequestMapping("/producer")
     @ResponseBody
@@ -39,17 +39,17 @@ public class KafkaProducerController {
         Msg msg = pMsg;
 
         try {
-            Map<String, Object> res = producerHandler.sendMsg(msg);
-            LOG.info( GsonUtils.toJsonStr(res) );
-            System.out.println("测试结果如下：===============");
-            String message = (String) res.get("message");
-            reVo.setMsg(message);
-
-            String code = (String) res.get("code");
-            reVo.setCode(code);
-
-            System.out.println("code:" + code);
-            System.out.println("message:" + message);
+//            Map<String, Object> res = producerHandler.sendMsg(msg);
+//            LOG.info( GsonUtils.toJsonStr(res) );
+//            System.out.println("测试结果如下：===============");
+//            String message = (String) res.get("message");
+//            reVo.setMsg(message);
+//
+//            String code = (String) res.get("code");
+//            reVo.setCode(code);
+//
+//            System.out.println("code:" + code);
+//            System.out.println("message:" + message);
 
         } catch (Exception ex){
 
@@ -74,17 +74,17 @@ public class KafkaProducerController {
         Msg msg = GsonUtils.toObject(pJsonMsg, Msg.class);
 
         try {
-            Map<String, Object> res = producerHandler.sendMsg(msg);
-            LOG.info( GsonUtils.toJsonStr(res) );
-            System.out.println("测试结果如下：===============");
-            String message = (String) res.get("message");
-            reVo.setMsg(message);
-
-            String code = (String) res.get("code");
-            reVo.setCode(code);
-
-            System.out.println("code:" + code);
-            System.out.println("message:" + message);
+//            Map<String, Object> res = producerHandler.sendMsg(msg);
+//            LOG.info( GsonUtils.toJsonStr(res) );
+//            System.out.println("测试结果如下：===============");
+//            String message = (String) res.get("message");
+//            reVo.setMsg(message);
+//
+//            String code = (String) res.get("code");
+//            reVo.setCode(code);
+//
+//            System.out.println("code:" + code);
+//            System.out.println("message:" + message);
 
         } catch (Exception ex){
 

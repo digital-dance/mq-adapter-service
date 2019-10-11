@@ -95,7 +95,7 @@ public class SpringContextUtil implements BeanFactoryPostProcessor, ApplicationC
             activeProfile = AppPropsConfig.getStrProperties("application.properties", SpringContextUtil.applicationClass)
                     .get("spring.profiles.active");
         }
-        return activeProfile;
+        return ( activeProfile == null ) ? "" : activeProfile;
     }
 
     public static void setApplicationClass(Class pApplicationClass){

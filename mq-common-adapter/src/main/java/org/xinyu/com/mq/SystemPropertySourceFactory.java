@@ -24,7 +24,12 @@ public class SystemPropertySourceFactory implements PropertySourceFactory {
     @Override
     public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) throws IOException {
 
-        String activeEnv = SpringContextUtil.getActiveProfile();
+        String activeEnv = "";
+        try {
+            activeEnv = SpringContextUtil.getActiveProfile();
+        } catch (Exception ex){
+            LoggerUtils.info( AppPropsConfig.class, GsonUtils.toJsonStr(ex) );
+        }
         //spring.profiles.active = dev,test
         //取得当前活动的环境名称（因为直接获取spring.profiles.active 失败，所以才把环境名称拼在文件名后面来拿）
         //其实感觉应该有可以直接取的方法比如从环境里取

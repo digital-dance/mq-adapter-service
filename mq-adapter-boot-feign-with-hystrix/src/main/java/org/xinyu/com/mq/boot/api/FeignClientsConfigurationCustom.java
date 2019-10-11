@@ -114,9 +114,9 @@ public class FeignClientsConfigurationCustom implements RequestInterceptor {
         return new FeignHystrixConcurrencyStrategy();
     }
 
-    @Bean
-    public Contract feignContract() {
-        //使用feign自带契约
-        return new feign.Contract.Default();
-    }
+//    @Bean
+//    public Contract feignContract() {
+//        //使用feign自带契约
+//        return new feign.Contract.Default();
+//    }
 }

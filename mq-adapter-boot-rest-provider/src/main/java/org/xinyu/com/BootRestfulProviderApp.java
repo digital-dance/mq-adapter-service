@@ -22,7 +22,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.session.data.redis.RedisFlushMode;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.xinyu.com.mq.ProducerHandler;
-import org.xinyu.com.mq.boot.rest.provider.KafkaProperties;
+//import org.xinyu.com.mq.boot.rest.provider.KafkaProperties;
 import org.xinyu.com.mq.impl.ProducerHandlerImpl;
 
 import java.util.Map;
@@ -35,9 +35,9 @@ import java.util.Map;
 @EnableDiscoveryClient
 //@SpringBootConfiguration
 @SpringBootApplication
-@ImportResource( {"classpath*:/ioc_conf/com-mq-boot-context.xml"} )
+//@ImportResource( {"classpath*:/ioc_conf/com-mq-boot-context.xml"} )
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 20000, redisFlushMode = RedisFlushMode.IMMEDIATE)//增加redissession缓存支持
-@EnableConfigurationProperties(KafkaProperties.class)
+//@EnableConfigurationProperties(KafkaProperties.class)
 @RefreshScope
 public class BootRestfulProviderApp {
 
