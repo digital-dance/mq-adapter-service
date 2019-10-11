@@ -1,34 +1,26 @@
-package org.xinyu.com;
+package org.xinyu;
 
-
-import com.digital.dance.framework.infrastructure.commons.AppPropsConfig;
 import com.digital.dance.framework.infrastructure.commons.Log;
+
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-//import org.springframework.cloud.netflix.feign.EnableFeignClients;
-//import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.session.data.redis.RedisFlushMode;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.xinyu.com.mq.ProducerHandler;
-//import org.xinyu.com.mq.boot.rest.provider.KafkaProperties;
-import org.xinyu.com.mq.impl.ProducerHandlerImpl;
+
 
 import java.util.Map;
 
-@Configuration
-@ComponentScan
+//@Configuration
+//@ComponentScan(basePackages = {"org.xinyu.com.mq.boot","org.xinyu.com.mq.boot.api","org.xinyu.com.mq.boot.rest"})
 
 @EnableAutoConfiguration
 @EnableFeignClients
@@ -36,26 +28,15 @@ import java.util.Map;
 //@SpringBootConfiguration
 @SpringBootApplication
 //@ImportResource( {"classpath*:/ioc_conf/com-mq-boot-context.xml"} )
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 20000, redisFlushMode = RedisFlushMode.IMMEDIATE)//增加redissession缓存支持
-//@EnableConfigurationProperties(KafkaProperties.class)
+@EnableRedisHttpSession(redisFlushMode = RedisFlushMode.IMMEDIATE)//增加redissession缓存支持
+//@SpringCloudApplication
 @RefreshScope
-public class BootRestfulProviderApp {
+public class BootRestfulApp {
+   static Log log = new Log(BootRestfulApp.class);
 
-    protected static final Log LOG = new Log(BootRestfulProviderApp.class);
 //    @Bean
-//    public Runnable createRunnable() {
-//        return () -> System.out.println("spring boot is running");
-//    }
-//@Bean
-//public RememberMeServices rememberMeServices() {
-//    RememberMeServices producerHandler = new SpringSessionRememberMeServices();
-//    //((ProducerHandlerImpl)producerHandler).setKafkaProducerServer(KafkaProducerServer());
-//    return producerHandler;
-//}
-//    @Bean
-//    public DefaultKafkaProducerFactory producerFactory() {
-//
-//        Map<Object, Object> map = AppPropsConfig.getProperties("system.properties", BootRestfulProviderApp.class);
+//    public org.springframework.kafka.core.DefaultKafkaProducerFactory producerFactory() {
+//        Map<Object, Object> map = AppPropsConfig.getProperties("system.properties", BootRestfulApp.class);
 //
 //        DefaultKafkaProducerFactory producerFactory = new DefaultKafkaProducerFactory(map);
 //
@@ -94,18 +75,55 @@ public class BootRestfulProviderApp {
 //        ((ProducerHandlerImpl)producerHandler).setKafkaProducerServer(KafkaProducerServer());
 //        return producerHandler;
 //    }
+    @Bean
+    public Runnable runnable() {
+//        Runnable runnable = new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                System.out.println("spring boot is running");
+//            }
+//        };
+        return () -> System.out.println("spring boot is running");
+//        return runnable;
+    }
 
     public static void main( String[] args )
     {
-        System.out.println( "BootRestfulProviderApp is starting!" );
-        //SpringApplication.run(BootApp.class, args);
-        org.xinyu.com.mq.SpringContextUtil.setApplicationClass( BootRestfulProviderApp.class );
-        ConfigurableApplicationContext context  = new SpringApplicationBuilder(BootRestfulProviderApp.class).web(WebApplicationType.SERVLET).run(args);
-//        ConfigurableApplicationContext context = SpringApplication.run(BootApp.class, args);
-        //context.getBean(Runnable.class).run();
+        System.out.println( "BootRestfulApp is starting!" );
+        org.xinyu.com.mq.SpringContextUtil.setApplicationClass( BootRestfulApp.class );
+        //SpringApplication.run(BootRestfulApp.class, args);
+//        ConfigurableApplicationContext context = SpringApplication.run(BootRestfulApp.class, args);
+        ConfigurableApplicationContext context  = new SpringApplicationBuilder(BootRestfulApp.class).web(WebApplicationType.SERVLET).run(args);
+        context.getBean(Runnable.class).run();
 //        System.out.println(context.getBean(User.class));
-//        Map map = (Map) context.getBean("createMap");   //注意这里直接获取到这个方法bean
-//        int age = (int) map.get("age");
+//        KafkaProducer kafkaProducer = null;
+//        try {
+//            kafkaProducer = (KafkaProducer) context.getBean(KafkaProducer.class);   //注意这里直接获取到这个方法bean
+//            Msg msg = new Msg();
+//            msg.setPartition(2);
+//            msg.setTopic("feign-topic");
+//            msg.setValue("feign-msg");
+//            msg.setIfPartition(false);
+//            ResponseVo responseVo = kafkaProducer.sendMsg("feign-topic", "feign-msg", 2, "feign", false);
+//            log.info("org.xinyu.com.mq.boot.api.KafkaProducer.sendMsg - "+ GsonUtils.toJsonStr(responseVo) );
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("org.xinyu.com.mq.boot.api.KafkaProducer.sendMsg - ", e);
+//        }
+//
+//        try {
+//            Msg msg = new Msg();
+//            msg.setPartition(1);
+//            msg.setTopic("feign-topic");
+//            msg.setValue("feign-msg");
+//            msg.setIfPartition(false);
+//            ResponseVo responseVo = kafkaProducer.sendJsonMsg(GsonUtils.toJsonStr(msg));
+//            log.info("org.xinyu.com.mq.boot.api.KafkaProducer.sendJsonMsg - "+ GsonUtils.toJsonStr(responseVo) );
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            log.error("org.xinyu.com.mq.boot.api.KafkaProducer.sendJsonMsg - ", e);
+//        }
 //        System.out.println("age=="+age);
     }
 

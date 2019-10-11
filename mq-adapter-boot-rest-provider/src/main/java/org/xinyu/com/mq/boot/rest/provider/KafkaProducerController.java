@@ -50,6 +50,8 @@ public class KafkaProducerController {
 //
 //            System.out.println("code:" + code);
 //            System.out.println("message:" + message);
+            reVo.setCode(Constants.RETURN_CODE_SUCCESS);
+            reVo.setMsg(Constants.SUCCESS_MSG);
 
         } catch (Exception ex){
 
@@ -85,6 +87,8 @@ public class KafkaProducerController {
 //
 //            System.out.println("code:" + code);
 //            System.out.println("message:" + message);
+            reVo.setCode(Constants.RETURN_CODE_SUCCESS);
+            reVo.setMsg(Constants.SUCCESS_MSG);
 
         } catch (Exception ex){
 
