@@ -3,4 +3,4 @@ kind: Namespace
 metadata:
   name: docker-pv
   labels:
-  name: docker-pv
+    name: docker-pv
